@@ -1,7 +1,7 @@
-const express = require('express');
-const http = require('http');
-const cors = require('cors');
-const { Server } = require('socket.io');
+import express, { Request, Response } from 'express';
+import http from 'http';
+import cors from 'cors';
+import { Server, Socket } from 'socket.io';
 
 const app = express();
 app.use(cors());
@@ -14,7 +14,7 @@ const io = new Server(server, {
   },
 });
 
-io.on('connection', (socket) => {
+io.on('connection', (socket: Socket) => {
   console.log('A user connected:', socket.id);
 
   // Handle game actions here
@@ -24,7 +24,7 @@ io.on('connection', (socket) => {
   });
 });
 
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
   res.send("Blackjack Backend Server");
 });
 
